@@ -1,0 +1,18 @@
+package(default_visibility = ["//visibility:public"])
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+
+proto_library(
+    name = "scenario_control_message_proto",
+    srcs = ["scenario_control_message.proto"],
+)
+
+proto_library(
+    name = "scenario_control_proto",
+    srcs = [
+        "scenario_control.proto",
+    ],
+    deps = [
+        ":scenario_control_message_proto",
+    ],
+)

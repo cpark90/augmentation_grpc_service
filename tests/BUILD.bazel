@@ -1,0 +1,48 @@
+load("@rules_python//python:defs.bzl", "py_test")
+load("@python_deps//:requirements.bzl", "requirement")
+load("@com_github_grpc_grpc//bazel:python_rules.bzl", "py_grpc_library", "py_proto_library")
+
+
+py_proto_library(
+    name = "scenario_control_message_pb2",
+    deps = [
+        "//protos:scenario_control_message_proto",
+    ]
+)
+
+py_proto_library(
+    name = "scenario_control_pb2",
+    deps = [
+        "//protos:scenario_control_proto",
+    ]
+)
+
+py_grpc_library(
+    name = "scenario_control_pb2_grpc",
+    srcs = [
+        "//protos:scenario_control_proto"
+    ],
+    deps = [
+        ":scenario_control_pb2",
+    ]
+)
+
+py_test(
+    name = "proto_test",
+    srcs = ["proto_test.py"],
+    deps = [
+        ":scenario_control_message_pb2",
+        ":scenario_control_pb2_grpc",
+    ]
+)
+
+py_test(
+    name = "service_scenario_control_sync_test",
+    srcs = ["service_scenario_control_sync_test.py"],
+    deps = [
+        requirement("grpcio-testing"),
+        "//augmentation_grpc_service/services:scenario_control_sync",
+        ":scenario_control_message_pb2",
+        ":scenario_control_pb2_grpc",
+    ]
+)

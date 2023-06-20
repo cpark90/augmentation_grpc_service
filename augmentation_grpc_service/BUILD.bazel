@@ -1,0 +1,14 @@
+package(default_visibility = ["//visibility:public"])
+load("@rules_python//python:defs.bzl", "py_library")
+load("@python_deps//:requirements.bzl", "requirement")
+
+
+py_library(
+    name = "rpc_async_server",
+    srcs = [
+        "rpc_async_server.py",
+    ],
+    deps = [
+        requirement("grpcio"),
+    ],
+)
