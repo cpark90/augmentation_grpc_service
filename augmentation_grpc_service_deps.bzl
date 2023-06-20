@@ -2,7 +2,6 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 
-
 def augmentation_grpc_service_deps():
     """Loads common dependencies needed to compile the protobuf library."""
     if not native.existing_rule("rules_python"):

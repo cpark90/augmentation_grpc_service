@@ -1,32 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("@rules_python//python:defs.bzl", "py_library")
 load("@python_deps//:requirements.bzl", "requirement")
-load("@com_github_grpc_grpc//bazel:python_rules.bzl", "py_grpc_library", "py_proto_library")
 
-
-py_proto_library(
-    name = "scenario_control_message_pb2",
-    deps = [
-        "//protos:scenario_control_message_proto",
-    ]
-)
-
-py_proto_library(
-    name = "scenario_control_pb2",
-    deps = [
-        "//protos:scenario_control_proto",
-    ]
-)
-
-py_grpc_library(
-    name = "scenario_control_pb2_grpc",
-    srcs = [
-        "//protos:scenario_control_proto"
-    ],
-    deps = [
-        ":scenario_control_pb2",
-    ]
-)
 
 py_library(
     name = "prototype_service_async",
@@ -35,8 +10,8 @@ py_library(
     ],
     deps = [
         requirement("grpcio"),
-        ":scenario_control_pb2_grpc",
-        ":scenario_control_message_pb2"
+        "//protos:scenario_control_pb2_grpc",
+        "//protos:scenario_control_message_pb2"
     ],
 )
 
@@ -47,7 +22,20 @@ py_library(
     ],
     deps = [
         requirement("grpcio"),
-        ":scenario_control_pb2_grpc",
-        ":scenario_control_message_pb2"
+        "//protos:scenario_control_pb2_grpc",
+        "//protos:scenario_control_message_pb2",
+        "//augmentation_grpc_service/augmentation_algorithms"
+    ],
+)
+
+
+py_library(
+    name = "services",
+    srcs = [
+        "__init__.py",
+    ],
+    deps = [
+        ":prototype_service_async",
+        ":prototype_service_sync",
     ],
 )

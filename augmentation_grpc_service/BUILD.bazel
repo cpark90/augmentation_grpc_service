@@ -4,11 +4,33 @@ load("@python_deps//:requirements.bzl", "requirement")
 
 
 py_library(
-    name = "rpc_async_server",
+    name = "grpc_server_async",
     srcs = [
-        "rpc_async_server.py",
+        "grpc_server_async.py",
     ],
     deps = [
         requirement("grpcio"),
+    ],
+)
+
+py_library(
+    name = "grpc_server_sync",
+    srcs = [
+        "grpc_server_sync.py",
+    ],
+    deps = [
+        requirement("grpcio"),
+    ],
+)
+
+
+py_library(
+    name = "augmentation_grpc_service",
+    srcs = [
+        "__init__.py",
+    ],
+    deps = [
+        ":grpc_server_async",
+        ":grpc_server_sync",
     ],
 )

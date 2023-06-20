@@ -12,6 +12,7 @@ class GrpcServerSync(object):
         self.server.add_insecure_port(addr)
     
     def serve(self):
+        print("start grpc server")
         self.server.start()
         try:
             while True:

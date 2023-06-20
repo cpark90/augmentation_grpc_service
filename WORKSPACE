@@ -68,10 +68,10 @@ load(
     "container_pull",
 )
 
-# python container
+# python container python:3.8.16 base
 container_pull(
     name = "python-base-image",
     registry = "docker.io",
     repository = "python",
-    tag = "3.7.16",
+    tag = "3.8.16",
 )

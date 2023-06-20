@@ -1,6 +1,6 @@
 import .scenario_control_pb2_grpc as scenario_control
 import .scenario_control_message_pb2 as scenario_control_message
-
+from .augmentation_grpc_service.augmentation_algorithms import PrototypeAlgorithm
 
 class ScenarioControlServicer(scenario_control.ScenarioControlServicer):
 
@@ -30,6 +30,8 @@ class ScenarioControlServicer(scenario_control.ScenarioControlServicer):
             else:
                 result = False
             yield scenario_control_message.ScenarioModifyResponse(status=result)
+        prototype_algorithm = PrototypeAlgorithm("test")
+        prototype_algorithm.run()
         
 
     def TerminateScenario(self, request, context):

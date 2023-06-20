@@ -1,0 +1,26 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_python//python:defs.bzl", "py_library")
+load("@python_deps//:requirements.bzl", "requirement")
+
+
+py_library(
+    name = "prototype_algorithm",
+    srcs = [
+        "prototype_algorithm.py",
+    ],
+    deps = [
+        requirement("numpy"),
+    ],
+)
+
+
+py_library(
+    name = "augmentation_algorithms",
+    srcs = [
+        "__init__.py",
+    ],
+    deps = [
+        ":prototype_algorithm",
+    ],
+)

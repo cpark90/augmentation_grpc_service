@@ -1,0 +1,25 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@python_deps//:requirements.bzl", "requirement")
+load("@io_bazel_rules_docker//lang:image.bzl", container_image = "app_layer")
+
+
+py_binary(
+    name = "prototype_example",
+    srcs = [
+        "prototype_example.py",
+    ],
+    deps = [
+        requirement("numpy"),
+        "//augmentation_grpc_service",
+        "//protos:scenario_control_pb2_grpc"
+    ],
+)
+
+container_image(
+    name = "prototype_example_image",
+    base = "@python-base-image//image",
+    binary = ":prototype_example",
+    docker_run_flags = "-it --rm --network=host --runtime=nvidia",
+)
