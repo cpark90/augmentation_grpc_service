@@ -4,40 +4,40 @@ load("@com_github_grpc_grpc//bazel:python_rules.bzl", "py_grpc_library", "py_pro
 
 
 proto_library(
-    name = "scenario_control_message_proto",
-    srcs = ["scenario_control_message.proto"],
+    name = "augmentation_service_message_proto",
+    srcs = ["augmentation_service_message.proto"],
 )
 
 proto_library(
-    name = "scenario_control_proto",
+    name = "augmentation_service_proto",
     srcs = [
-        "scenario_control.proto",
+        "augmentation_service.proto",
     ],
     deps = [
-        ":scenario_control_message_proto",
+        ":augmentation_service_message_proto",
     ],
 )
 
 py_proto_library(
-    name = "scenario_control_message_pb2",
+    name = "augmentation_service_message_pb2",
     deps = [
-        ":scenario_control_message_proto",
+        ":augmentation_service_message_proto",
     ]
 )
 
 py_proto_library(
-    name = "scenario_control_pb2",
+    name = "augmentation_service_pb2",
     deps = [
-        ":scenario_control_proto",
+        ":augmentation_service_proto",
     ]
 )
 
 py_grpc_library(
-    name = "scenario_control_pb2_grpc",
+    name = "augmentation_service_pb2_grpc",
     srcs = [
-        ":scenario_control_proto"
+        ":augmentation_service_proto"
     ],
     deps = [
-        ":scenario_control_pb2",
+        ":augmentation_service_pb2",
     ]
 )

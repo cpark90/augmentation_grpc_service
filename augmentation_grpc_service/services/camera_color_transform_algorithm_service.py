@@ -1,8 +1,8 @@
 import protos.augmentation_service_pb2_grpc as augmentation_service
 import protos.augmentation_service_message_pb2 as augmentation_service_message
-from augmentation_grpc_service.augmentation_algorithms.prototype_algorithm import PrototypeAlgorithm
+from augmentation_grpc_service.augmentation_algorithms.camera_color_transform import CameraColorTransformAlgorithm
 
-class PrototypeAlgorithmServicer(augmentation_service.AugmentationServicer):
+class CameraColorTransformAlgorithmServicer(augmentation_service.AugmentationServicer):
 
     def InitEngine(self, request, context):
         metadata = dict(context.invocation_metadata())
@@ -17,8 +17,8 @@ class PrototypeAlgorithmServicer(augmentation_service.AugmentationServicer):
 
     def Augment(self, request, context):
         metadata = dict(context.invocation_metadata())
-        prototype_algorithm = PrototypeAlgorithm("test")
-        result_data, error_status = prototype_algorithm.run(request.src_directory_path,
+        camera_color_transform_algorithm = CameraColorTransformAlgorithm("test")
+        result_data, error_status = camera_color_transform_algorithm.run(request.src_directory_path,
                                 request.src_GT_directory_path,
                                 request.tgt_directory_path,
                                 request.tgt_GT_directory_path,

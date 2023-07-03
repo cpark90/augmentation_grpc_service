@@ -5,6 +5,28 @@ load("@python_deps//:requirements.bzl", "requirement")
 load("@io_bazel_rules_docker//lang:image.bzl", container_image = "app_layer")
 
 
+# client example
+py_binary(
+    name = "client_example",
+    srcs = [
+        "client_example.py",
+    ],
+    deps = [
+        requirement("grpcio"),
+        "//protos:augmentation_service_pb2",
+        "//protos:augmentation_service_pb2_grpc",
+    ],
+)
+
+container_image(
+    name = "client_example_image",
+    base = "@python-base-image//image",
+    binary = ":client_example",
+    docker_run_flags = "-it --rm --network=host",
+)
+
+
+# prototype algorithm example
 py_binary(
     name = "prototype_example",
     srcs = [
@@ -13,7 +35,8 @@ py_binary(
     deps = [
         requirement("numpy"),
         "//augmentation_grpc_service",
-        "//protos:scenario_control_pb2_grpc"
+        "//augmentation_grpc_service/services:prototype_service_sync",
+        "//protos:augmentation_service_pb2_grpc",
     ],
 )
 
@@ -21,5 +44,5 @@ container_image(
     name = "prototype_example_image",
     base = "@python-base-image//image",
     binary = ":prototype_example",
-    docker_run_flags = "-it --rm --network=host --runtime=nvidia",
+    docker_run_flags = "-it --rm --network=host",
 )

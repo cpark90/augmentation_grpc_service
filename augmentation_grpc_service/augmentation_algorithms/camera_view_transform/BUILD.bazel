@@ -1,25 +1,25 @@
 package(default_visibility = ["//visibility:public"])
+
 load("@rules_python//python:defs.bzl", "py_library")
 load("@python_deps//:requirements.bzl", "requirement")
 
 
 py_library(
-    name = "grpc_server_sync",
+    name = "camera_view_transform_algorithm_lib",
     srcs = [
-        "grpc_server_sync.py",
+        "camera_view_transform_algorithm.py",
     ],
     deps = [
-        requirement("grpcio"),
+        requirement("numpy"),
     ],
 )
 
-
 py_library(
-    name = "augmentation_grpc_service",
+    name = "camera_view_transform",
     srcs = [
         "__init__.py",
-    ],
+    ]
     deps = [
-        ":grpc_server_sync",
-    ],
+        ":camera_view_transform_algorithm_lib",
+    ]
 )

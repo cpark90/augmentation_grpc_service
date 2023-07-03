@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "protos/augmentation_service_message.proto";
+
+service Augmentation {
+  rpc InitEngine(augmentation_service.InitEngineRequest) returns (augmentation_service.InitEngineResponse);
+  rpc Augment(augmentation_service.AugmentRequest) returns (stream augmentation_service.AugmentResponse);
+  rpc Validate(augmentation_service.ValidateRequest) returns (augmentation_service.ValidateResponse);
+}

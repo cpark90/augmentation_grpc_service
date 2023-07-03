@@ -1,6 +1,6 @@
 import numpy as np
 
-class PrototypeAlgorithm(object):
+class CameraColorTransformAlgorithm(object):
 
     def __init__(self, args):
         self.args = args
@@ -16,23 +16,10 @@ class PrototypeAlgorithm(object):
         result_data = True
         error_status = ""
         return result_data, error_status
-
-        
-class PrototypeValidationAlgorithm(object):
-
-    def __init__(self, args):
-        self.args = args
-        self.np_array = np.array([0, 1, 2, 3, 4])
     
-    def run(self, src_sensor_profile_path,
-            transform_config_path,
-            src_directory_path):
-        result_data = True
-        error_status = ""
-        return result_data, error_status
 
 if __name__ == "__main__":
-    prototype_algorithm = PrototypeAlgorithm("test")
+    prototype_algorithm = CameraColorTransformAlgorithm("test")
     src_directory_path = "/media/external_storage/2323/src_directory_path.txt"
     src_GT_directory_path = "src_GT_directory_path"
     tgt_directory_path = "tgt_directory_path"

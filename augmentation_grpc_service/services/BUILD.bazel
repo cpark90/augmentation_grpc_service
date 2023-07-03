@@ -4,14 +4,15 @@ load("@python_deps//:requirements.bzl", "requirement")
 
 
 py_library(
-    name = "prototype_service_async",
+    name = "camera_color_transform_algorithm_service",
     srcs = [
-        "prototype_service_async.py",
+        "camera_color_transform_algorithm_service.py",
     ],
     deps = [
         requirement("grpcio"),
-        "//protos:scenario_control_pb2_grpc",
-        "//protos:scenario_control_message_pb2"
+        "//protos:augmentation_service_pb2_grpc",
+        "//protos:augmentation_service_message_pb2",
+        "//augmentation_grpc_service/augmentation_algorithms/camera_color_transform"
     ],
 )
 
@@ -22,12 +23,24 @@ py_library(
     ],
     deps = [
         requirement("grpcio"),
-        "//protos:scenario_control_pb2_grpc",
-        "//protos:scenario_control_message_pb2",
-        "//augmentation_grpc_service/augmentation_algorithms"
+        "//protos:augmentation_service_pb2_grpc",
+        "//protos:augmentation_service_message_pb2",
+        "//augmentation_grpc_service/augmentation_algorithms:prototype_algorithm"
     ],
 )
 
+py_library(
+    name = "prototype_validation_service_sync",
+    srcs = [
+        "prototype_validation_service_sync.py",
+    ],
+    deps = [
+        requirement("grpcio"),
+        "//protos:augmentation_service_pb2_grpc",
+        "//protos:augmentation_service_message_pb2",
+        "//augmentation_grpc_service/augmentation_algorithms:prototype_algorithm"
+    ],
+)
 
 py_library(
     name = "services",
@@ -35,7 +48,7 @@ py_library(
         "__init__.py",
     ],
     deps = [
-        ":prototype_service_async",
         ":prototype_service_sync",
+        ":prototype_validation_service_sync"
     ],
 )

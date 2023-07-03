@@ -14,8 +14,4 @@ class GrpcServerSync(object):
     def serve(self):
         print("start grpc server")
         self.server.start()
-        try:
-            while True:
-                time.sleep(100)
-        except KeyboardInterrupt:
-            self.server.stop(0)
+        self.server.wait_for_termination()

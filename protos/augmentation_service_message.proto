@@ -1,0 +1,50 @@
+syntax = "proto3";
+package augmentation_service;
+
+enum ResultType {
+  SUCCESS = 0;
+  FAIL = 1;
+}
+
+message TestMessage {
+  ResultType status = 1;
+}
+
+// Scenario Initialization message
+message InitEngineRequest {
+  string data = 1;
+}
+
+message InitEngineResponse {
+  bool response = 1;
+}
+
+
+// Scenario modification message
+message AugmentRequest {
+  string src_directory_path = 1;
+  string src_GT_directory_path = 2;
+  string tgt_directory_path = 3;
+  string tgt_GT_directory_path = 4;
+  string src_sensor_profile_path = 5;
+  string tgt_sensor_profile_path = 6;
+  string transform_config_path = 7;
+}
+
+message AugmentResponse {
+  bool response = 1;
+  string error_status = 2;
+}
+
+
+// Scenario termination message
+message ValidateRequest {
+  string src_sensor_profile_path = 1;
+  string transform_config_path = 2;
+  string src_directory_path = 3;
+}
+
+message ValidateResponse {
+  bool response = 1;
+  string error_status = 2;
+}
