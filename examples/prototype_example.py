@@ -1,4 +1,4 @@
-from augmentation_grpc_service import GrpcServerSync
+from augmentation_grpc_service.grpc_server_sync import GrpcServerSync
 import protos.augmentation_service_pb2_grpc as augmentation_service_pb2_grpc
 from augmentation_grpc_service.services.prototype_service_sync import PrototypeAlgorithmServicer
 

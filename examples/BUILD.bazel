@@ -33,8 +33,8 @@ py_binary(
         "prototype_example.py",
     ],
     deps = [
-        requirement("numpy"),
-        "//augmentation_grpc_service",
+        requirement("future"),
+        "//augmentation_grpc_service:grpc_server_sync",
         "//augmentation_grpc_service/services:prototype_service_sync",
         "//protos:augmentation_service_pb2_grpc",
     ],

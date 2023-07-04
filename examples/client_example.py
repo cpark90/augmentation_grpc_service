@@ -18,11 +18,8 @@ def run():
             transform_config_path="/workspace/src/configs/camera_transform_config.yaml"
         )
 
-        responses = stub.Augment(request)
-        if responses is not None:  
-            print(responses)
-        else:
-            print("Transfer failed")
+        response = stub.Augment(request)
+        print(response.response)
 
 if __name__ == "__main__":
     run()
